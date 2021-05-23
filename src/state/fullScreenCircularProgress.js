@@ -18,7 +18,7 @@ const initialState = {
   circurals: [],
 }
 
-export default (state = initialState, action) => {
+const fullScreenCircularProgress = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CIRCULAR:
       return {
@@ -34,3 +34,5 @@ export default (state = initialState, action) => {
       return state
   }
 }
+
+export default fullScreenCircularProgress
