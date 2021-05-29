@@ -5,6 +5,7 @@ import { circularProgress } from "./state/fullScreenCircularProgress"
 import Snackbars from "./components/Snackbars"
 import { addSnackbar } from "./state/snackbars"
 import ScrollTop from "./components/ScrollTop"
+import { BrowserRouter } from "react-router-dom"
 
 function App() {
   const { add, remove } = circularProgress
@@ -18,7 +19,9 @@ function App() {
   return (
     <div className="App">
       <FullScreenCircularProgress />
-      <ScrollTop />
+      <BrowserRouter>
+        <ScrollTop />
+      </BrowserRouter>
       <Snackbars />
     </div>
   )

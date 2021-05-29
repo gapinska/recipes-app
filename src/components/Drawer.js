@@ -14,7 +14,7 @@ import DehazeIcon from "@material-ui/icons/Dehaze"
 import { useSelector, useDispatch } from "react-redux"
 import { toogleDrawerStatus } from "../state/drawer"
 import { useHistory } from "react-router-dom"
-
+import { withRouter } from "react-router-dom"
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -24,13 +24,20 @@ const useStyles = makeStyles({
   },
 })
 
-export default function SwipeableTemporaryDrawer() {
+const SwipeableTemporaryDrawer = (props) => {
   const history = useHistory()
   const classes = useStyles()
   const drawerStatus = useSelector(
     (state) => state.toogleDrawerStatus.drawerStatus
   )
   const dispatch = useDispatch()
+  const links = [
+    { title: "Add recipe", route: "/add-recipe" },
+    { title: "Recipes", route: "/recipes" },
+    { title: "Your recipes", route: "/your-recipes" },
+  ]
+
+  const redirect = (link) => history.push(link)
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -54,9 +61,13 @@ export default function SwipeableTemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Dodaj przepis", "Przepisy", "Twoje przepisy"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
+        {links.map((text, index) => (
+          <ListItem
+            button
+            key={text.title}
+            onClick={() => redirect(text.route)}
+          >
+            <ListItemText primary={text.title} />
           </ListItem>
         ))}
       </List>
@@ -64,7 +75,7 @@ export default function SwipeableTemporaryDrawer() {
   )
 
   return (
-    <div style={{ display: "flex", justifyContent: "space-around" }}>
+    <div style={{ display: "flex", alignItems: "center" }}>
       {["left"].map((anchor) => (
         <div key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>
@@ -82,16 +93,30 @@ export default function SwipeableTemporaryDrawer() {
         </div>
       ))}
       <div
+        onClick={() => redirect("/")}
         style={{
           position: "absolute",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           textTransform: "uppercase",
+          cursor: "pointer",
         }}
       >
         Chef App
       </div>
+      <div
+        style={{
+          textTransform: "uppercase",
+          fontSize: "10px",
+          marginLeft: "60vw",
+        }}
+      >
+        <div>Change password</div>
+        <div>Log Out</div>
+      </div>
     </div>
   )
 }
+
+export default withRouter(SwipeableTemporaryDrawer)
