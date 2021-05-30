@@ -13,8 +13,7 @@ import MailIcon from "@material-ui/icons/Mail"
 import DehazeIcon from "@material-ui/icons/Dehaze"
 import { useSelector, useDispatch } from "react-redux"
 import { toogleDrawerStatus } from "../state/drawer"
-import { useHistory } from "react-router-dom"
-import { withRouter } from "react-router-dom"
+import { useHistory, withRouter, Link, Router } from "react-router-dom"
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -112,8 +111,15 @@ const SwipeableTemporaryDrawer = (props) => {
           marginLeft: "60vw",
         }}
       >
-        <div>Change password</div>
-        <div>Log Out</div>
+        <Link
+          style={{ color: "white", textDecoration: "none" }}
+          to="/change-pssword"
+        >
+          <div>Change password</div>
+        </Link>
+        <Link style={{ color: "white", textDecoration: "none" }} to="/">
+          <div>Log Out</div>
+        </Link>
       </div>
     </div>
   )

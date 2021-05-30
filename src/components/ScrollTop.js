@@ -12,6 +12,11 @@ import Fab from "@material-ui/core/Fab"
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp"
 import Zoom from "@material-ui/core/Zoom"
 import Drawer from "./Drawer"
+import { Switch, Route } from "react-router-dom"
+import AddRecipe from "./AddRecipe"
+import YourRecipes from "./YourRecipes"
+import Recipes from "./Recipes"
+import Home from "./Home"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,30 +81,20 @@ export default function BackToTop(props) {
       <Toolbar id="back-to-top-anchor" />
       <Container>
         <Box my={2}>
-          {[...new Array(12)]
-            .map(
-              () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
-            )
-            .join("\n")}
+          <Switch>
+            <Route path="/add-recipe">
+              <AddRecipe />
+            </Route>
+            <Route path="/recipes">
+              <Recipes />
+            </Route>
+            <Route path="/your-recipes">
+              <YourRecipes />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
         </Box>
       </Container>
       <ScrollTop {...props}>
